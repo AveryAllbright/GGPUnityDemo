@@ -9,31 +9,38 @@ public class SpellManager : MonoBehaviour
     public GameObject MagicMissilePrefab;
     public GameObject RockWallPrefab;
 
-   public  GameObject user;
+    public GameObject user;
 
     GameObject fireBall;
     GameObject magicMissile;
     GameObject rockWall;
 
 
-    int m_nActiveSpell = 0;
+   public int m_nActiveSpell = 0;
     int m_nSpellCount = 2;
+
+    public float m_fCoolDown = 0f;
 
     public List<GameObject> LiveSpells;
     public List<GameObject> SpellBook;
 
     void Start()
     {
-         fireBall = Instantiate(FireBallPrefab);
-         magicMissile = Instantiate(MagicMissilePrefab);
-         rockWall = Instantiate(RockWallPrefab);
+        fireBall = Instantiate(FireBallPrefab);
+        fireBall.transform.position = new Vector3(0, -100, 0);
+
+        magicMissile = Instantiate(MagicMissilePrefab);
+        magicMissile.transform.position = new Vector3(0, -100, 0);
+
+        rockWall = Instantiate(RockWallPrefab);
+        rockWall.transform.position = new Vector3(0, -100, 0);
 
         SpellBook.Add(fireBall);
         SpellBook.Add(magicMissile);
         SpellBook.Add(rockWall);
 
         user = GameObject.Find("FPSController");
-       
+
     }
 
 
@@ -53,22 +60,38 @@ public class SpellManager : MonoBehaviour
             if (m_nActiveSpell < 0) { m_nActiveSpell = m_nSpellCount; }
         }
 
-        if (Input.GetButtonUp("Fire1")) 
-        {
-            LiveSpells.Add(Instantiate(SpellBook[m_nActiveSpell]));
+        if (Input.GetButtonUp("Fire1"))
+        {       
+            GameObject temp = Instantiate(SpellBook[m_nActiveSpell]);
+            LiveSpells.Add(temp);
             LiveSpells[LiveSpells.Count - 1].GetComponent<SpellController>().SetUser(user);
+
+            switch (m_nActiveSpell)
+            {
+                case 0: m_fCoolDown = 50f; break;
+                case 1: m_fCoolDown = 35f; break;
+                case 2: m_fCoolDown = 175f; break;
+            }
+
         }
 
         foreach (GameObject spell in LiveSpells)
         {
             SpellController con = spell.GetComponent<SpellController>();
-            if(con.lifeSpan <=0)
+            if (con.lifeSpan <= 0)
             {
                 Destroy(spell);
+                LiveSpells.Remove(spell);
+                break;
             }
         }
 
-        
+
+        if (m_fCoolDown > 0)
+        {
+            m_fCoolDown -= Time.deltaTime;
+            if (m_fCoolDown < 0) { m_fCoolDown = 0; }
+        }
 
     }
 }

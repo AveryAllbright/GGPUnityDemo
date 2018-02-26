@@ -19,7 +19,7 @@ public class SpellController : MonoBehaviour {
 
         switch (Tag)
         {
-            case "FireBall": lifeSpan = 100; speed = 12f; damage = 8; direction = user.transform.forward; transform.position = user.transform.position + user.transform.forward; break;
+            case "FireBall": lifeSpan = 100; speed = 12f; damage = 8; direction = user.transform.forward; transform.position = user.transform.position + user.transform.forward + new Vector3(0,1,0); break;
             case "MagicMissile": lifeSpan = 250; speed = 8f; damage = 3; break;
             case "RockWall": lifeSpan = 500; break;
         }
