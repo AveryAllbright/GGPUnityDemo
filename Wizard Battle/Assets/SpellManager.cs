@@ -62,8 +62,8 @@ public class SpellManager : MonoBehaviour
 
         if (Input.GetButtonUp("Fire1"))
         {       
-            GameObject temp = Instantiate(SpellBook[m_nActiveSpell]);
-            LiveSpells.Add(temp);
+          //  GameObject temp = Instantiate(SpellBook[m_nActiveSpell]);
+            LiveSpells.Add(Instantiate(SpellBook[m_nActiveSpell]));
             LiveSpells[LiveSpells.Count - 1].GetComponent<SpellController>().SetUser(user);
 
             switch (m_nActiveSpell)
@@ -81,8 +81,8 @@ public class SpellManager : MonoBehaviour
             if (con.lifeSpan <= 0)
             {
                 Destroy(spell);
-                LiveSpells.Remove(spell);
-                break;
+                //LiveSpells.Remove(spell);
+                //break;
             }
         }
 
