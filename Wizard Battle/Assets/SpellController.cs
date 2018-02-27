@@ -25,9 +25,9 @@ public class SpellController : MonoBehaviour {
 
         switch (Tag)
         {
-            case "FireBall": lifeSpan = 100; speed = 12f; damage = 8; direction = user.GetComponentInChildren<Camera>().transform.forward; transform.position = user.transform.position + user.GetComponentInChildren<Camera>().transform.forward + new Vector3(0,.8f,0); break;
+            case "FireBall": lifeSpan = 100; speed = 12f; damage = 8;  break;
             case "MagicMissile": lifeSpan = 250; speed = 8f; damage = 3; break;
-            case "RockWall": lifeSpan = 500; transform.position = user.transform.position + (user.transform.forward * 2) + new Vector3(0, -2, 0);  break;
+            case "RockWall": lifeSpan = 500;   break;
             case "Dig": terrain = Terrain.activeTerrain; heightMapDimensions = new Vector2(terrain.terrainData.heightmapWidth, terrain.terrainData.heightmapHeight); lifeSpan = 3; break;
         }
     }
@@ -46,7 +46,7 @@ public class SpellController : MonoBehaviour {
 
     void Fireball()
     {
-        transform.position += direction / speed;
+        print(transform.position);
         lifeSpan--;
         
     }
@@ -107,5 +107,6 @@ public class SpellController : MonoBehaviour {
     public void SetUser(GameObject a_user)
     {
         user = a_user;
+        direction = user.GetComponentInChildren<Camera>().transform.forward;
     }
 }

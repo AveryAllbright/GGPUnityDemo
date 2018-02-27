@@ -226,6 +226,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Game.cs" />
+    <Compile Include="Assets\ResetTerrain.cs" />
     <Compile Include="Assets\SpellController.cs" />
     <Compile Include="Assets\SpellManager.cs" />
   </ItemGroup>

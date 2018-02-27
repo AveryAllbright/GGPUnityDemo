@@ -13,6 +13,7 @@ public class Game : MonoBehaviour {
 	void Start ()
     {
         Player = GameObject.Find("FPSController");
+        Player.transform.position = new Vector3(0, 1, 0);
         level = 1;
         SpawnLevel();
 	}

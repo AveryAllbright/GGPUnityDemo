@@ -27,6 +27,7 @@ public class SpellManager : MonoBehaviour
 
     void Start()
     {
+        /*
         fireBall = Instantiate(FireBallPrefab);
         fireBall.transform.position = new Vector3(0, -100, 0);
 
@@ -42,8 +43,9 @@ public class SpellManager : MonoBehaviour
         SpellBook.Add(magicMissile);
         SpellBook.Add(rockWall);
         SpellBook.Add(Lifter);
-
+        */
         user = GameObject.Find("FPSController");
+        LiveSpells = new List<GameObject>();
 
     }
 
@@ -65,17 +67,24 @@ public class SpellManager : MonoBehaviour
         }
 
         if (Input.GetButtonUp("Fire1"))
-        {       
-          //  GameObject temp = Instantiate(SpellBook[m_nActiveSpell]);
-            LiveSpells.Add(Instantiate(SpellBook[m_nActiveSpell]));
-            LiveSpells[LiveSpells.Count - 1].GetComponent<SpellController>().SetUser(user);
+        {
+            //GameObject temp = Instantiate(SpellBook[m_nActiveSpell]);
+            // LiveSpells.Add(Instantiate(SpellBook[m_nActiveSpell]));
+            // LiveSpells[LiveSpells.Count - 1].GetComponent<SpellController>().SetUser(user);
 
+            GameObject temp = null;
             switch (m_nActiveSpell)
             {
-                case 0: m_fCoolDown = 50f; break;
-                case 1: m_fCoolDown = 35f; break;
-                case 2: m_fCoolDown = 175f; break;
+                case 0: temp = Instantiate(FireBallPrefab); break;
+                case 1: LiveSpells.Add(Instantiate(RockWallPrefab)); break;
+                case 2: LiveSpells.Add(Instantiate(MagicMissilePrefab)); break;
+                case 3: LiveSpells.Add(Instantiate(Lifter)); break;                   
             }
+
+            temp.transform.position = user.transform.position;
+            LiveSpells.Add((GameObject)Instantiate(temp, user.transform.position + user.GetComponentInChildren<Camera>().transform.forward, new Quaternion(0,0,0,0)));
+            LiveSpells[LiveSpells.Count - 1].GetComponent<SpellController>().SetUser(user);
+
 
         }
 
@@ -85,8 +94,8 @@ public class SpellManager : MonoBehaviour
             if (con.lifeSpan <= 0)
             {
                 Destroy(spell);
-                //LiveSpells.Remove(spell);
-                //break;
+                LiveSpells.Remove(spell);
+                break;
             }
         }
 
