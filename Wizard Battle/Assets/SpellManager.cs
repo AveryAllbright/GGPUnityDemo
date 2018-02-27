@@ -8,6 +8,7 @@ public class SpellManager : MonoBehaviour
     public GameObject FireBallPrefab;
     public GameObject MagicMissilePrefab;
     public GameObject RockWallPrefab;
+    public GameObject Lifter;
 
     public GameObject user;
 
@@ -17,7 +18,7 @@ public class SpellManager : MonoBehaviour
 
 
    public int m_nActiveSpell = 0;
-    int m_nSpellCount = 2;
+    int m_nSpellCount = 3;
 
     public float m_fCoolDown = 0f;
 
@@ -35,9 +36,12 @@ public class SpellManager : MonoBehaviour
         rockWall = Instantiate(RockWallPrefab);
         rockWall.transform.position = new Vector3(0, -100, 0);
 
+        Lifter = Instantiate(Lifter);
+
         SpellBook.Add(fireBall);
         SpellBook.Add(magicMissile);
         SpellBook.Add(rockWall);
+        SpellBook.Add(Lifter);
 
         user = GameObject.Find("FPSController");
 
