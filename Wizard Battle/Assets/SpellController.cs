@@ -5,8 +5,8 @@ using UnityEngine;
 public class SpellController : MonoBehaviour {
 
     GameObject target;
-    GameObject user;
-    Vector3 direction;
+    public GameObject user;
+    public Vector3 direction;
     public int lifeSpan;
     float speed;
     int damage;
@@ -22,10 +22,9 @@ public class SpellController : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-
         switch (Tag)
         {
-            case "FireBall": lifeSpan = 100; speed = 12f; damage = 8;  break;
+            case "FireBall": lifeSpan = 100; speed = 6f; damage = 8;   break;
             case "MagicMissile": lifeSpan = 250; speed = 8f; damage = 3; break;
             case "RockWall": lifeSpan = 500;   break;
             case "Dig": terrain = Terrain.activeTerrain; heightMapDimensions = new Vector2(terrain.terrainData.heightmapWidth, terrain.terrainData.heightmapHeight); lifeSpan = 3; break;
@@ -46,7 +45,7 @@ public class SpellController : MonoBehaviour {
 
     void Fireball()
     {
-        print(transform.position);
+        transform.position += direction / speed;
         lifeSpan--;
         
     }
@@ -62,9 +61,9 @@ public class SpellController : MonoBehaviour {
         //TODO : replace height check with terrain height level check
         //TODO : set rotation based on player look
 
-        if (transform.position.y < user.transform.position.y + .4f)
+        if (transform.position.y  < Terrain.activeTerrain.terrainData.GetHeight((int)transform.position.x, (int)transform.position.y) * 2 )
         {
-            transform.position = new Vector3(0, .02f, 0) + transform.position;
+            transform.position = new Vector3(0, .04f, 0) + transform.position;
         }
         else
         {
@@ -104,9 +103,10 @@ public class SpellController : MonoBehaviour {
         }
     }
 
-    public void SetUser(GameObject a_user)
+    public void SetDirection()
     {
-        user = a_user;
+
         direction = user.GetComponentInChildren<Camera>().transform.forward;
+       
     }
 }

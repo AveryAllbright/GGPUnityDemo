@@ -38,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1529849663294200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 151.94621, y: 1.35, z: 89.889694}
-  m_LocalScale: {x: 1.3229204, y: 1.8323978, z: 0.3292287}
+  m_LocalScale: {x: 1.3229204, y: 3.8, z: 0.3292287}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -107,4 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deedd7e0ecdbc2547bc0231b86e368ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  user: {fileID: 0}
+  direction: {x: 0, y: 0, z: 0}
+  lifeSpan: 0
   Tag: RockWall

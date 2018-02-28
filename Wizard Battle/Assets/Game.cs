@@ -13,7 +13,6 @@ public class Game : MonoBehaviour {
 	void Start ()
     {
         Player = GameObject.Find("FPSController");
-        Player.transform.position = new Vector3(0, 1, 0);
         level = 1;
         SpawnLevel();
 	}
@@ -44,6 +43,7 @@ public class Game : MonoBehaviour {
             tempBullshit.y = 0;
             Targets[i].transform.position = tempBullshit;
             Targets[i].transform.LookAt(playerLoc);
+            Targets[i].transform.rotation = new Quaternion(0, 0, 0, 0);
         }
 
 
